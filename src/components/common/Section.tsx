@@ -1,11 +1,11 @@
 import React, { PropsWithChildren } from "react";
 import styled from "styled-components";
 
-type Props = {
+type PropsType = {
   title: string;
 };
 
-function Section({ title, children }: PropsWithChildren<Props>) {
+function Section({ title, children }: PropsWithChildren<PropsType>) {
   return (
     <StSection>
       <h1 className="section__title">{title}</h1>
@@ -15,7 +15,6 @@ function Section({ title, children }: PropsWithChildren<Props>) {
 }
 
 const StSection = styled.section`
-  width: 100%;
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.base};
@@ -26,6 +25,10 @@ const StSection = styled.section`
   & .section__title {
     font-size: ${({ theme }) => theme.fontSize.xl};
     font-weight: bold;
+  }
+
+  & .section__content {
+    display: flex;
   }
 `;
 export default Section;

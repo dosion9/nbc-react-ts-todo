@@ -17,7 +17,8 @@ const theme: DefaultTheme = {
     warningLight: "#fcce42",
     danger: "#dc3545",
     dangerDark: "#b32431",
-    dangerLight: "#eb5967"
+    dangerLight: "#eb5967",
+    disabled: "#525151"
   },
 
   spacing: {
