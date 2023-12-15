@@ -1,19 +1,27 @@
-import Todo from "components/Todo/Todo";
+import TodoForm from "components/Todo/TodoForm";
+import TodoList from "components/Todo/TodoList";
 import Section from "components/common/Section";
-import { v4 as uuidv4 } from "uuid";
+import { useModal, useTodo } from "hooks";
 
 function App() {
-  // const data = {
-  //   id: uuidv4(),
-  //   title: "testtest testtesttestt esttestt esttesttest",
-  //   content:
-  //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. In, debitis tempore! Dolorum officiis unde ab, enim provident corrupti! Itaque eaque labore a sunt, consequatur aliquam ad ipsam impedit praesentium aspernatur! ",
-  //   isDone: false
-  // };
+  const { todoDoneList, todoWorkingList, createTodo, deleteTodo, updateTodo } = useTodo();
+  const { modal, updateModal } = useModal();
   return (
     <>
-      <Section title={"타이틀"}>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>{/* <Todo data={data} /> */}</div>
+      {modal}
+      <Section title={"Todo 작성하기"}>
+        <TodoForm createTodo={createTodo} />
+      </Section>
+      <Section title={"working"}>
+        <TodoList
+          todoList={todoWorkingList}
+          deleteTodo={deleteTodo}
+          updateTodo={updateTodo}
+          updateModal={updateModal}
+        />
+      </Section>
+      <Section title={"Done"}>
+        <TodoList todoList={todoDoneList} deleteTodo={deleteTodo} updateTodo={updateTodo} updateModal={updateModal} />
       </Section>
     </>
   );

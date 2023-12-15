@@ -1,31 +1,35 @@
 import Button from "components/common/Button";
 import styled from "styled-components";
+import { ModalContent, TodoType } from "types";
 
-interface TodoData {
-  id: string;
-  title: string;
-  content: string;
-  isDone: boolean;
-}
+type PropsType = {
+  data: TodoType;
+  updateTodo: ({ id }: Pick<TodoType, "id">) => void;
+  deleteTodo: ({ id }: Pick<TodoType, "id">) => void;
+  updateModal: (content: ModalContent, onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined) => void;
+};
 
-function Todo({ data }: { data: TodoData }) {
-  const { id, title, content, isDone }: TodoData = data;
+function Todo({ data, updateTodo, deleteTodo, updateModal }: PropsType) {
+  const { content, isDone, title } = data;
+  const onClickDelete = () => {
+    updateModal(ModalContent.DeleteTodo, () => deleteTodo(data));
+  };
   return (
     <StWrap>
       <h3 className="todo__title">{title}</h3>
       <p className="todo__content">{content}</p>
       <div className="todo__button-wrap">
         {!isDone ? (
-          <Button color="success" onClick={() => console.log(1)}>
+          <Button color="success" onClick={() => updateTodo(data)}>
             완료
           </Button>
         ) : (
-          <Button color="warning" onClick={() => console.log(1)}>
+          <Button color="warning" onClick={() => updateTodo(data)}>
             취소
           </Button>
         )}
 
-        <Button color="danger" onClick={() => console.log(1)}>
+        <Button color="danger" onClick={onClickDelete}>
           삭제하기
         </Button>
       </div>
