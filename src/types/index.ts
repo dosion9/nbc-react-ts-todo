@@ -7,8 +7,8 @@ export type TodoType = {
 
 export type ModalStateType = {
   isOpen: boolean;
+  isConfirm: boolean;
   content: ModalContent;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 export enum ModalContent {

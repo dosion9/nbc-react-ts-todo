@@ -1,30 +1,41 @@
 import Button from "components/common/Button";
+import { useModal, useTodo } from "hooks";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { ModalContent, TodoType } from "types";
 
 type PropsType = {
   data: TodoType;
-  updateTodo: ({ id }: Pick<TodoType, "id">) => void;
-  deleteTodo: ({ id }: Pick<TodoType, "id">) => void;
-  updateModal: (content: ModalContent, onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined) => void;
 };
 
-function Todo({ data, updateTodo, deleteTodo, updateModal }: PropsType) {
-  const { content, isDone, title } = data;
+function Todo({ data }: PropsType) {
+  const [isTarget, setIsTarget] = useState(false);
+  const { id, content, isDone, title } = data;
+  const { onDeleteTodo, onUpdateTodo } = useTodo();
+  const { onUpdateModal, modalState } = useModal();
+
   const onClickDelete = () => {
-    updateModal(ModalContent.DeleteTodo, () => deleteTodo(data));
+    onUpdateModal(ModalContent.DeleteTodo);
+    setIsTarget(true);
   };
+
+  useEffect(() => {
+    if (isTarget) {
+      onDeleteTodo(id);
+    }
+  }, [modalState.isConfirm]);
+
   return (
     <StWrap>
       <h3 className="todo__title">{title}</h3>
       <p className="todo__content">{content}</p>
       <div className="todo__button-wrap">
         {!isDone ? (
-          <Button color="success" onClick={() => updateTodo(data)}>
+          <Button color="success" onClick={() => onUpdateTodo(id)}>
             완료
           </Button>
         ) : (
-          <Button color="warning" onClick={() => updateTodo(data)}>
+          <Button color="warning" onClick={() => onUpdateTodo(id)}>
             취소
           </Button>
         )}

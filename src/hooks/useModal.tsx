@@ -1,18 +1,28 @@
-import React, { useState } from "react";
-import Modal from "components/Modal/Modal";
-import { ModalStateType, ModalContent } from "types";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../redux/config/configStore";
+import { closeModal, confirmModal, updateModal } from "../redux/modules/modalSlice";
+import { ModalContent } from "types";
+import { useEffect } from "react";
 
 export const useModal = () => {
-  const initialState = { isOpen: false, content: ModalContent.Default };
-  const [modalState, setModalState] = useState<ModalStateType>(initialState);
+  const dispatch = useDispatch();
+  const modalState = useSelector((state: RootState) => state.modalSlice);
+  const { isOpen, isConfirm, content } = modalState;
 
-  const onClickClose = () => setModalState(initialState);
+  useEffect(() => {
+    if (isConfirm) {
+      dispatch(closeModal());
+    }
+  }, [isConfirm]);
 
-  const updateModal = (content: ModalContent, onClick?: React.MouseEventHandler<HTMLButtonElement>) => {
-    setModalState({ content: content, isOpen: true, ...(onClick && { onClick: onClick }) });
+  const onCloseModal = () => dispatch(closeModal());
+
+  const onUpdateModal = (content: ModalContent) => {
+    dispatch(updateModal(content));
+    return isConfirm;
   };
 
-  const modal = <Modal modalState={modalState} onClickClose={onClickClose} />;
+  const onConfirmModal = () => dispatch(confirmModal());
 
-  return { modal, updateModal };
+  return { modalState, onCloseModal, onUpdateModal, onConfirmModal };
 };

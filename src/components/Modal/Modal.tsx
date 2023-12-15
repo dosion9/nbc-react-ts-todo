@@ -1,45 +1,27 @@
 import Button from "components/common/Button";
 import styled from "styled-components";
 import Dimmer from "./Dimmer";
-import { ModalStateType } from "types";
+import { useModal } from "hooks";
 
-type PropsType = {
-  modalState: ModalStateType;
-  onClickClose: () => void;
-};
+function Modal() {
+  const { modalState, onCloseModal, onConfirmModal } = useModal();
 
-function Modal({ modalState, onClickClose }: PropsType) {
-  const { isOpen, onClick, content } = modalState;
-
-  if (!isOpen) return <></>;
-
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    onClick && onClick(e);
-    onClickClose();
-  };
+  if (!modalState.isOpen) return <></>;
 
   return (
     <>
       <Dimmer />
       <StModal>
         <StContent>
-          <p> {content}</p>
+          <p> {modalState.content}</p>
         </StContent>
         <StFooter>
-          {onClick ? (
-            <>
-              <Button color="success" onClick={handleClick}>
-                확인
-              </Button>
-              <Button color="danger" onClick={onClickClose}>
-                취소
-              </Button>
-            </>
-          ) : (
-            <Button color="success" onClick={onClickClose}>
-              확인
-            </Button>
-          )}
+          <Button color="success" onClick={onConfirmModal}>
+            확인
+          </Button>
+          <Button color="danger" onClick={onCloseModal}>
+            취소
+          </Button>
         </StFooter>
       </StModal>
     </>

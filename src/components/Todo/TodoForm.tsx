@@ -1,21 +1,18 @@
 import Button from "components/common/Button";
 import Input from "components/common/Input";
+import { useTodo } from "hooks";
 import { useState } from "react";
 import styled from "styled-components";
 
-type PropsType = {
-  createTodo: (title: string, content: string) => void;
-};
-
-function TodoForm({ createTodo }: PropsType) {
+function TodoForm() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-
+  const { onCreateTodo } = useTodo();
   const handleCreate = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     setTitle("");
     setContent("");
-    createTodo(title, content);
+    onCreateTodo(title, content);
   };
 
   return (

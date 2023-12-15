@@ -1,30 +1,24 @@
-import { useState } from "react";
-import { TodoType } from "types";
-import { v4 as uuidv4 } from "uuid";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../redux/config/configStore";
+import { createTodo, deleteTodo, updateTodo } from "../redux/modules/todoSlice";
 
 export const useTodo = () => {
-  const [todoList, seTodoTypeList] = useState<TodoType[]>([]);
-
+  const dispatch = useDispatch();
+  const { todoList } = useSelector((state: RootState) => state.todoSlice);
   const todoDoneList = todoList.filter((todo) => todo.isDone);
   const todoWorkingList = todoList.filter((todo) => !todo.isDone);
 
-  const createTodo = (title: string, content: string) => {
-    const newTodo: TodoType = {
-      title,
-      content,
-      id: uuidv4(),
-      isDone: false
-    };
-    seTodoTypeList((prev) => [...prev, newTodo]);
+  const onCreateTodo = (title: string, content: string) => {
+    dispatch(createTodo({ title, content }));
   };
 
-  const deleteTodo = ({ id }: Pick<TodoType, "id">) => {
-    seTodoTypeList((prev) => [...prev.filter((n) => n.id !== id)]);
+  const onDeleteTodo = (id: string) => {
+    dispatch(deleteTodo(id));
   };
 
-  const updateTodo = ({ id }: Pick<TodoType, "id">) => {
-    seTodoTypeList((prev) => [...prev.map((n) => (n.id === id ? { ...n, isDone: !n.isDone } : n))]);
+  const onUpdateTodo = (id: string) => {
+    dispatch(updateTodo(id));
   };
 
-  return { todoDoneList, todoWorkingList, createTodo, deleteTodo, updateTodo };
+  return { todoDoneList, todoWorkingList, onCreateTodo, onDeleteTodo, onUpdateTodo };
 };

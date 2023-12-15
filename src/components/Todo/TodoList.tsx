@@ -1,19 +1,16 @@
 import styled from "styled-components";
+import { TodoType } from "types";
 import Todo from "./Todo";
-import { ModalContent, TodoType } from "types";
 
 type PropsType = {
   todoList: TodoType[];
-  updateTodo: ({ id }: Pick<TodoType, "id">) => void;
-  deleteTodo: ({ id }: Pick<TodoType, "id">) => void;
-  updateModal: (content: ModalContent, onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined) => void;
 };
 
-function TodoList({ todoList, updateTodo, deleteTodo, updateModal }: PropsType) {
+function TodoList({ todoList }: PropsType) {
   return (
     <STodoTypeList>
       {todoList.map((n) => (
-        <Todo data={n} updateTodo={updateTodo} deleteTodo={deleteTodo} updateModal={updateModal} key={n.id} />
+        <Todo data={n} key={n.id} />
       ))}
     </STodoTypeList>
   );
