@@ -1,4 +1,5 @@
 import { todoURL } from "apis";
+import { TodoType } from "types";
 
 // ========== INTERCEPTORS ==========
 todoURL.interceptors.request.use(
@@ -20,7 +21,7 @@ todoURL.interceptors.response.use(
 );
 
 // ========== CRUD  ==========
-const createTodo = async (todo: TodoType): Promise<TodoType | void> => {
+const createTodo = async (todo: TodoType) => {
   try {
     const res = await todoURL.post("/todos", todo);
     return res.data;
@@ -29,7 +30,7 @@ const createTodo = async (todo: TodoType): Promise<TodoType | void> => {
   }
 };
 
-const getTodoList = async (): Promise<TodoType[] | void> => {
+const getTodoList = async () => {
   try {
     const res = await todoURL.get("/todos");
     return res.data;
@@ -38,7 +39,7 @@ const getTodoList = async (): Promise<TodoType[] | void> => {
   }
 };
 
-const updateTodo = async (todo: Pick<TodoType, "id" | "isDone">): Promise<TodoType[] | void> => {
+const updateTodo = async (todo: Pick<TodoType, "id" | "isDone">) => {
   try {
     const res = await todoURL.patch(`/todos/${todo.id}`, { isDone: todo.isDone });
     return res.data;
@@ -47,7 +48,7 @@ const updateTodo = async (todo: Pick<TodoType, "id" | "isDone">): Promise<TodoTy
   }
 };
 
-const deleteTodo = async (id: string): Promise<string | void> => {
+const deleteTodo = async (id: string) => {
   try {
     await todoURL.delete(`/todos/${id}`);
     return id;

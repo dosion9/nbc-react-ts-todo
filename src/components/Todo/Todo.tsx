@@ -2,6 +2,7 @@ import Button from "components/common/Button";
 import { useModal, useTodo } from "hooks";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { TodoType } from "types";
 import { ModalContent } from "types/modalType";
 
 type PropsType = {
@@ -10,7 +11,7 @@ type PropsType = {
 
 function Todo({ data }: PropsType) {
   const [isTarget, setIsTarget] = useState(false);
-  const { id, content, isDone, title } = data;
+  const { content, isDone, title } = data;
   const { onDeleteTodo, onUpdateTodo } = useTodo();
   const { onUpdateModal, modalState } = useModal();
 
@@ -21,7 +22,7 @@ function Todo({ data }: PropsType) {
 
   useEffect(() => {
     if (modalState.isConfirm && isTarget) {
-      onDeleteTodo(id);
+      onDeleteTodo(data);
       setIsTarget(false);
     }
   }, [modalState.isConfirm]);

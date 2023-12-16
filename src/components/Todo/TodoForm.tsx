@@ -12,7 +12,7 @@ function TodoForm() {
     e.preventDefault();
     setTitle("");
     setContent("");
-    onCreateTodo(title, content);
+    onCreateTodo({ title, content });
   };
 
   return (

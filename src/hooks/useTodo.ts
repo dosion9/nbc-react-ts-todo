@@ -1,41 +1,35 @@
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../redux/config/configStore";
-import { createTodo, deleteTodo, setTodoList, updateTodo } from "../redux/modules/todoSlice";
-import { todoAPI } from "apis/todo";
+import { __createTodo, __deleteTodo, __getTodoList, __updateTodo } from "../redux/modules/todoSlice";
 import { v4 as uuidv4 } from "uuid";
+import { useAppDispatch, useAppSelector } from "./useRedux";
+import { TodoType } from "types";
 
 export const useTodo = () => {
-  const dispatch = useDispatch();
-  const { todoList } = useSelector((state: RootState) => state.todoSlice);
+  const dispatch = useAppDispatch();
+  const { todoList } = useAppSelector((state) => state.todoSlice);
   const todoDoneList = todoList.filter((todo) => todo.isDone);
   const todoWorkingList = todoList.filter((todo) => !todo.isDone);
 
-  const getTodoList = async () => {
-    const res = await todoAPI.getTodoList();
-    res && dispatch(setTodoList(res));
+  const getTodoList = () => {
+    dispatch(__getTodoList());
   };
 
-  const onCreateTodo = async (title: string, content: string) => {
+  const onCreateTodo = ({ title, content }: Pick<TodoType, "title" | "content">) => {
     const newTodo: TodoType = {
       title,
       content,
       id: uuidv4(),
       isDone: false
     };
-
-    const res = await todoAPI.createTodo(newTodo);
-    res && dispatch(createTodo(res));
+    dispatch(__createTodo(newTodo));
   };
 
-  const onDeleteTodo = async (id: string) => {
-    const res = await todoAPI.deleteTodo(id);
-    res && dispatch(deleteTodo(res));
+  const onDeleteTodo = (todo: Pick<TodoType, "id">) => {
+    dispatch(__deleteTodo(todo));
   };
 
-  const onUpdateTodo = async (todo: Pick<TodoType, "id" | "isDone">) => {
+  const onUpdateTodo = (todo: Pick<TodoType, "id" | "isDone">) => {
     todo = { ...todo, isDone: !todo.isDone };
-    const res = await todoAPI.updateTodo(todo);
-    res && dispatch(updateTodo(todo));
+    dispatch(__updateTodo(todo));
   };
 
   return { todoDoneList, todoWorkingList, getTodoList, onCreateTodo, onDeleteTodo, onUpdateTodo };

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Todo from "./Todo";
+import { TodoType } from "types";
 
 type PropsType = {
   todoList: TodoType[];
