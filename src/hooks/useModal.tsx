@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/config/configStore";
 import { closeModal, confirmModal, updateModal } from "../redux/modules/modalSlice";
-import { ModalContent } from "types";
 import { useEffect } from "react";
+import { ModalContent } from "types/modalType";
 
 export const useModal = () => {
   const dispatch = useDispatch();

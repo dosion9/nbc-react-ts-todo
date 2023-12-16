@@ -2,7 +2,7 @@ import Button from "components/common/Button";
 import { useModal, useTodo } from "hooks";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { ModalContent, TodoType } from "types";
+import { ModalContent } from "types/modalType";
 
 type PropsType = {
   data: TodoType;

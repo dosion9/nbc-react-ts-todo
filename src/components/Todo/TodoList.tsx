@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { TodoType } from "types";
 import Todo from "./Todo";
 
 type PropsType = {

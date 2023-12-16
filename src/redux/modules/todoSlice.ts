@@ -1,13 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TodoType } from "types";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
 
-type TodoListType = {
-  todoList: TodoType[];
-};
-
-const initialState: TodoListType = {
+const initialState: { todoList: TodoType[] } = {
   todoList: []
 };
 
@@ -15,6 +10,9 @@ const todoSlice = createSlice({
   name: "todo",
   initialState,
   reducers: {
+    setTodoList: (state, action: PayloadAction<TodoType[]>) => {
+      state.todoList = action.payload;
+    },
     createTodo: (state, action: PayloadAction<{ title: string; content: string }>) => {
       const { title, content } = action.payload;
 
@@ -37,4 +35,4 @@ const todoSlice = createSlice({
 });
 
 export default todoSlice.reducer;
-export const { createTodo, deleteTodo, updateTodo } = todoSlice.actions;
+export const { setTodoList, createTodo, deleteTodo, updateTodo } = todoSlice.actions;
