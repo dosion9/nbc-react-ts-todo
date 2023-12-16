@@ -13,7 +13,7 @@ root.render(
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <App />
-    </ThemeProvider>{" "}
+    </ThemeProvider>
   </Provider>
 );
 

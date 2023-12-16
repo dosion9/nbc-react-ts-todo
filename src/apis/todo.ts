@@ -20,7 +20,7 @@ todoURL.interceptors.response.use(
 );
 
 // ========== CRUD  ==========
-export const createTodo = async (todo: TodoType) => {
+const createTodo = async (todo: TodoType): Promise<TodoType | void> => {
   try {
     const res = await todoURL.post("/todos", todo);
     return res.data;
@@ -29,7 +29,7 @@ export const createTodo = async (todo: TodoType) => {
   }
 };
 
-export const getTodoList = async (): Promise<TodoType[] | void> => {
+const getTodoList = async (): Promise<TodoType[] | void> => {
   try {
     const res = await todoURL.get("/todos");
     return res.data;
@@ -38,20 +38,27 @@ export const getTodoList = async (): Promise<TodoType[] | void> => {
   }
 };
 
-export const updateTodo = async ({ id, isDone }: { id: string; isDone: boolean }) => {
+const updateTodo = async (todo: Pick<TodoType, "id" | "isDone">): Promise<TodoType[] | void> => {
   try {
-    const res = await todoURL.patch(`/todos/${id}`, { isDone: isDone });
+    const res = await todoURL.patch(`/todos/${todo.id}`, { isDone: todo.isDone });
     return res.data;
   } catch (error) {
     console.error(error);
   }
 };
 
-export const deleteTodo = async (id: string) => {
+const deleteTodo = async (id: string): Promise<string | void> => {
   try {
-    const res = await todoURL.delete(`/todos/${id}`);
-    return res.data;
+    await todoURL.delete(`/todos/${id}`);
+    return id;
   } catch (error) {
     console.error(error);
   }
+};
+
+export const todoAPI = {
+  createTodo,
+  getTodoList,
+  updateTodo,
+  deleteTodo
 };

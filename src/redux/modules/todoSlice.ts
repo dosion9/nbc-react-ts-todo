@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from "uuid";
 
 const initialState: { todoList: TodoType[] } = {
   todoList: []
@@ -13,23 +12,16 @@ const todoSlice = createSlice({
     setTodoList: (state, action: PayloadAction<TodoType[]>) => {
       state.todoList = action.payload;
     },
-    createTodo: (state, action: PayloadAction<{ title: string; content: string }>) => {
-      const { title, content } = action.payload;
-
-      const newTodo: TodoType = {
-        title,
-        content,
-        id: uuidv4(),
-        isDone: false
-      };
-      state.todoList.push(newTodo);
+    createTodo: (state, action: PayloadAction<TodoType>) => {
+      state.todoList.push(action.payload);
     },
 
     deleteTodo: (state, action: PayloadAction<string>) => {
       state.todoList = state.todoList.filter((n) => n.id !== action.payload);
     },
-    updateTodo: (state, action: PayloadAction<string>) => {
-      state.todoList = state.todoList.map((n) => (n.id === action.payload ? { ...n, isDone: !n.isDone } : n));
+    updateTodo: (state, action: PayloadAction<Pick<TodoType, "id" | "isDone">>) => {
+      const { id, isDone } = action.payload;
+      state.todoList = state.todoList.map((n) => (n.id === id ? { ...n, isDone: isDone } : n));
     }
   }
 });

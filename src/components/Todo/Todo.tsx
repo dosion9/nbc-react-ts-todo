@@ -20,8 +20,9 @@ function Todo({ data }: PropsType) {
   };
 
   useEffect(() => {
-    if (isTarget) {
+    if (modalState.isConfirm && isTarget) {
       onDeleteTodo(id);
+      setIsTarget(false);
     }
   }, [modalState.isConfirm]);
 
@@ -31,11 +32,11 @@ function Todo({ data }: PropsType) {
       <p className="todo__content">{content}</p>
       <div className="todo__button-wrap">
         {!isDone ? (
-          <Button color="success" onClick={() => onUpdateTodo(id)}>
+          <Button color="success" onClick={() => onUpdateTodo(data)}>
             완료
           </Button>
         ) : (
-          <Button color="warning" onClick={() => onUpdateTodo(id)}>
+          <Button color="warning" onClick={() => onUpdateTodo(data)}>
             취소
           </Button>
         )}
