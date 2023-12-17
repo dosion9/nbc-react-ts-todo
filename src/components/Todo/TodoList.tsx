@@ -8,15 +8,15 @@ type PropsType = {
 
 function TodoList({ todoList }: PropsType) {
   return (
-    <STodoTypeList>
+    <StTodoTypeList>
       {todoList.map((n) => (
         <Todo data={n} key={n.id} />
       ))}
-    </STodoTypeList>
+    </StTodoTypeList>
   );
 }
 
-const STodoTypeList = styled.div`
+const StTodoTypeList = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.spacing.base};
