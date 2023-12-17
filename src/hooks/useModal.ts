@@ -7,13 +7,13 @@ import { ModalContent } from "types/modalType";
 export const useModal = () => {
   const dispatch = useDispatch();
   const modalState = useSelector((state: RootState) => state.modalSlice);
-  const { isOpen, isConfirm, content } = modalState;
+  const { isConfirm } = modalState;
 
   useEffect(() => {
     if (isConfirm) {
       dispatch(closeModal());
     }
-  }, [isConfirm]);
+  }, [isConfirm, dispatch]);
 
   const onCloseModal = () => dispatch(closeModal());
 
