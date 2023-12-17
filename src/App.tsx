@@ -3,14 +3,10 @@ import TodoForm from "components/Todo/TodoForm";
 import TodoList from "components/Todo/TodoList";
 import Section from "components/common/Section";
 import { useTodo } from "hooks";
-import { useEffect } from "react";
 
 function App() {
-  const { todoDoneList, todoWorkingList, getTodoList } = useTodo();
+  const { todoDoneList, todoWorkingList } = useTodo();
 
-  useEffect(() => {
-    getTodoList();
-  }, []);
   return (
     <>
       <Modal />

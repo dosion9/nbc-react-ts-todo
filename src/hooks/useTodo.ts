@@ -1,17 +1,13 @@
-import { __createTodo, __deleteTodo, __getTodoList, __updateTodo } from "../redux/modules/todoSlice";
 import { v4 as uuidv4 } from "uuid";
-import { useAppDispatch, useAppSelector } from "./useRedux";
 import { TodoType } from "types";
+import { useTodoQuery } from "./useTodoQuery";
 
 export const useTodo = () => {
-  const dispatch = useAppDispatch();
-  const { todoList } = useAppSelector((state) => state.todoSlice);
-  const todoDoneList = todoList.filter((todo) => todo.isDone);
-  const todoWorkingList = todoList.filter((todo) => !todo.isDone);
+  const { query, createTodoMutation, deleteTodoMutation, updateTodoMutation } = useTodoQuery();
+  const { data: todoListQ, isLoading } = query;
 
-  const getTodoList = () => {
-    dispatch(__getTodoList());
-  };
+  const todoDoneList: TodoType[] = todoListQ ? todoListQ.filter((todo: TodoType) => todo.isDone) : [];
+  const todoWorkingList: TodoType[] = todoListQ ? todoListQ!.filter((todo: TodoType) => !todo.isDone) : [];
 
   const onCreateTodo = ({ title, content }: Pick<TodoType, "title" | "content">) => {
     const newTodo: TodoType = {
@@ -20,17 +16,24 @@ export const useTodo = () => {
       id: uuidv4(),
       isDone: false
     };
-    dispatch(__createTodo(newTodo));
+    createTodoMutation.mutate(newTodo);
   };
 
   const onDeleteTodo = (todo: Pick<TodoType, "id">) => {
-    dispatch(__deleteTodo(todo));
+    deleteTodoMutation.mutate(todo);
   };
 
   const onUpdateTodo = (todo: Pick<TodoType, "id" | "isDone">) => {
     todo = { ...todo, isDone: !todo.isDone };
-    dispatch(__updateTodo(todo));
+    updateTodoMutation.mutate(todo);
   };
 
-  return { todoDoneList, todoWorkingList, getTodoList, onCreateTodo, onDeleteTodo, onUpdateTodo };
+  return {
+    todoDoneList,
+    todoWorkingList,
+    isLoading,
+    onCreateTodo,
+    onDeleteTodo,
+    onUpdateTodo
+  };
 };

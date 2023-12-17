@@ -48,10 +48,10 @@ const updateTodo = async (todo: Pick<TodoType, "id" | "isDone">) => {
   }
 };
 
-const deleteTodo = async (id: string) => {
+const deleteTodo = async (todo: Pick<TodoType, "id">) => {
   try {
-    await todoURL.delete(`/todos/${id}`);
-    return id;
+    await todoURL.delete(`/todos/${todo.id}`);
+    return todo.id;
   } catch (error) {
     console.error(error);
   }
