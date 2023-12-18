@@ -19,6 +19,7 @@ function TodoList({ todoList }: PropsType) {
 const StTodoTypeList = styled.div`
   display: flex;
   flex-wrap: wrap;
+  min-height: 210px;
   gap: ${({ theme }) => theme.spacing.base};
 `;
 
