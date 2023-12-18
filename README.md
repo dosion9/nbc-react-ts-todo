@@ -1,4 +1,4 @@
-# 그룹 아티스트 팬레터함
+# TS로 만들어보는 단계별 Todo List
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
