@@ -1,6 +1,7 @@
 import Button from "components/common/Button";
-import { useModal, useTodo } from "hooks";
+import { useTodo } from "hooks";
 import { useEffect, useState } from "react";
+import { useModalStore } from "store/modalStore";
 import styled from "styled-components";
 import { TodoType } from "types";
 import { ModalContent } from "types/modalType";
@@ -13,19 +14,18 @@ function Todo({ data }: PropsType) {
   const [isTarget, setIsTarget] = useState(false);
   const { content, isDone, title } = data;
   const { onDeleteTodo, onUpdateTodo } = useTodo();
-  const { onUpdateModal, modalState } = useModal();
+  const { isConfirm, updateModal } = useModalStore();
 
   const onClickDelete = () => {
-    onUpdateModal(ModalContent.DeleteTodo);
+    updateModal(ModalContent.DeleteTodo);
     setIsTarget(true);
   };
 
   useEffect(() => {
-    if (modalState.isConfirm && isTarget) {
+    if (isConfirm && isTarget) {
       onDeleteTodo(data);
-      setIsTarget(false);
     }
-  }, [modalState.isConfirm]);
+  }, [isConfirm]);
 
   return (
     <StWrap>
