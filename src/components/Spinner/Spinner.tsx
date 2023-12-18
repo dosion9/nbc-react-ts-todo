@@ -1,9 +1,9 @@
 import Dimmer from "components/Modal/Dimmer";
-import { useSpinner } from "hooks";
+import { useSpinnerStore } from "store/spinnerStore";
 import styled, { keyframes } from "styled-components";
 
 function Spinner() {
-  const { isOpen } = useSpinner();
+  const { isOpen } = useSpinnerStore();
   if (!isOpen) return <></>;
   return (
     <>

@@ -1,25 +1,32 @@
 import Button from "components/common/Button";
 import styled from "styled-components";
 import Dimmer from "./Dimmer";
-import { useModal } from "hooks";
+import { useModalStore } from "store/modalStore";
+import { useEffect } from "react";
 
 function Modal() {
-  const { modalState, onCloseModal, onConfirmModal } = useModal();
+  const { content, isOpen, isConfirm, closeModal, confirmModal } = useModalStore();
 
-  if (!modalState.isOpen) return <></>;
+  useEffect(() => {
+    if (isConfirm) {
+      closeModal();
+    }
+  }, [isConfirm, closeModal]);
+
+  if (!isOpen) return <></>;
 
   return (
     <>
       <Dimmer />
       <StModal>
         <StContent>
-          <p> {modalState.content}</p>
+          <p> {content}</p>
         </StContent>
         <StFooter>
-          <Button color="success" onClick={onConfirmModal}>
+          <Button color="success" onClick={confirmModal}>
             확인
           </Button>
-          <Button color="danger" onClick={onCloseModal}>
+          <Button color="danger" onClick={closeModal}>
             취소
           </Button>
         </StFooter>
