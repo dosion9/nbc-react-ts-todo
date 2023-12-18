@@ -49,6 +49,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - axios
 - json-server
 
+#### [[Lv6] zustand를 사용한 Todo List](https://github.com/dosion9/nbc-react-ts-todo/tree/Lv6)
+
+- ~~react-redux~~
+- ~~@reduxjs/toolkit~~
+- zustand
+- @tanstack/react-query
+- axios
+- ~~json-server~~
+
 ## Json Server
 
 Glitch를 사용하여 json server 배포
@@ -98,3 +107,4 @@ json-server --watch db.json --port 4000
 
 - Custom Modal
 - Spinner
+- Lv6 zustand를 활용한 상태관리
