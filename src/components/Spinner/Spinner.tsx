@@ -8,7 +8,7 @@ function Spinner() {
   return (
     <>
       <Dimmer />
-      <StSpinner />;
+      <StSpinner />
     </>
   );
 }
