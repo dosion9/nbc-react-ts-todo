@@ -1,46 +1,100 @@
-# Getting Started with Create React App
+# 그룹 아티스트 팬레터함
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Todo List
 
-In the project directory, you can run:
+![Image](https://github.com/dosion9/nbc-react-ts-todo/assets/146798554/40e946bc-70c0-4497-8f0d-f82795f31010)
 
-### `npm start`
+### Todo 프로젝트
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[프로젝트 이동하기](https://nbc-react-ts-todo.vercel.app/)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 기술 스택 및 사용 라이브러리
 
-### `npm test`
+#### 공통
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- react
+- typescript
+- styled-components
+- styled-reset
+- uuid
 
-### `npm run build`
+#### [[Lv1] useState와 Props를 사용한 Todo List](https://github.com/dosion9/nbc-react-ts-todo/tree/Lv1)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### [[Lv2] redux-toolkit을 사용한 Todo List](https://github.com/dosion9/nbc-react-ts-todo/tree/Lv2)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- react-redux
+- @reduxjs/toolkit
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### [[Lv3] json-server를 사용한 Todo List](https://github.com/dosion9/nbc-react-ts-todo/tree/Lv3)
 
-### `npm run eject`
+- react-redux
+- @reduxjs/toolkit
+- axios
+- json-server
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### [[Lv4] createAsyncThunk 사용한 Todo List](https://github.com/dosion9/nbc-react-ts-todo/tree/Lv4)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- react-redux
+- @reduxjs/toolkit
+- axios
+- json-server
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### [[Lv5] tanstack query를 사용한 Todo List](https://github.com/dosion9/nbc-react-ts-todo/tree/Lv5)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- react-redux
+- @reduxjs/toolkit
+- @tanstack/react-query
+- axios
+- json-server
 
-## Learn More
+## Json Server
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Glitch를 사용하여 json server 배포
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [Glitch](https://glitch.com/)
+- [Json Server Template](https://github.com/jesperorb/json-server-heroku)
+- [Todo App Json Server Repository](https://github.com/dosion9/nbc-react-ts-todo-json-server)
+
+## 프로젝트 설치
+
+### clone repository
+
+```
+git init
+git clone https://github.com/dosion9/nbc-react-ts-todo
+```
+
+### Install npm dependencies
+
+```
+npm install
+```
+
+### Start dev-server
+
+```
+npm run start
+```
+
+### Start json-server
+
+```
+json-server --watch db.json --port 4000
+```
+
+## 구현
+
+### 필수 구현 사항
+
+- ✔️ Lv1
+- ✔️ Lv2
+- ✔️ Lv3
+- ✔️ Lv4
+- ✔️ Lv5
+
+### 추가 구현 사항
+
+- Custom Modal
+- Spinner
