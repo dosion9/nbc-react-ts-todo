@@ -4,10 +4,10 @@ import { useTodoQuery } from "./useTodoQuery";
 
 export const useTodo = () => {
   const { query, createTodoMutation, deleteTodoMutation, updateTodoMutation } = useTodoQuery();
-  const { data: todoListQ, isLoading } = query;
+  const { data: todoList, isLoading } = query;
 
-  const todoDoneList: TodoType[] = todoListQ ? todoListQ.filter((todo: TodoType) => todo.isDone) : [];
-  const todoWorkingList: TodoType[] = todoListQ ? todoListQ!.filter((todo: TodoType) => !todo.isDone) : [];
+  const todoDoneList: TodoType[] = todoList ? todoList.filter((todo: TodoType) => todo.isDone) : [];
+  const todoWorkingList: TodoType[] = todoList ? todoList!.filter((todo: TodoType) => !todo.isDone) : [];
 
   const onCreateTodo = ({ title, content }: Pick<TodoType, "title" | "content">) => {
     const newTodo: TodoType = {

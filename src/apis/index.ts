@@ -2,5 +2,5 @@ import axios from "axios";
 
 export const todoURL = axios.create({
   baseURL: process.env.REACT_APP_SERVER_URL,
-  timeout: 500
+  timeout: 1000
 });

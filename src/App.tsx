@@ -1,4 +1,5 @@
 import Modal from "components/Modal/Modal";
+import Spinner from "components/Spinner/Spinner";
 import TodoForm from "components/Todo/TodoForm";
 import TodoList from "components/Todo/TodoList";
 import Section from "components/common/Section";
@@ -9,6 +10,7 @@ function App() {
 
   return (
     <>
+      <Spinner />
       <Modal />
       <Section title={"Todo 작성하기"}>
         <TodoForm />

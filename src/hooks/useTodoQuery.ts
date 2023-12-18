@@ -26,5 +26,6 @@ export const useTodoQuery = () => {
       queryClient.invalidateQueries({ queryKey: ["todoList"] });
     }
   });
+
   return { query, createTodoMutation, deleteTodoMutation, updateTodoMutation };
 };
