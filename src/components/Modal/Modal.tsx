@@ -17,7 +17,7 @@ function Modal() {
 
   return (
     <>
-      <Dimmer />
+      <Dimmer onClick={closeModal} />
       <StModal>
         <StContent>
           <p> {content}</p>
